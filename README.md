@@ -4,3 +4,5 @@
 1,自定义文字View <br/>
 2,自定义图片View <br/>
 3,自定义静态时钟 <br/>
+
+[我的博客](http://blog.csdn.net/jinjin10086)
