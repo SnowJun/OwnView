@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="com.jinjin.viewstudy.viewstudy.MainActivity">
+
+
+    <Button
+        android:id="@+id/btn_test_text01"
+        android:text="TextView测试"
+        android:textAllCaps="false"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <Button
+        android:layout_below="@+id/btn_test_text01"
+        android:id="@+id/btn_test_image01"
+        android:text="ImageView测试"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="false"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:layout_below="@+id/btn_test_image01"
+        android:id="@+id/btn_test_clock01"
+        android:text="静态时钟测试"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="false"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

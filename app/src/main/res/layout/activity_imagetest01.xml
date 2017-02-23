@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:image1="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.jinjin.viewstudy.viewstudy.MainActivity">
+
+
+    <com.jinjin.viewstudy.viewstudy.view.DemoImageView01
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:padding="5dp"
+        image1:image="@mipmap/image1"
+        image1:watermark="http://blog.jinjin.net"
+        image1:watermarkcolor="@android:color/holo_red_dark"
+        image1:watermarksize="small"/>
+
+
+    <com.jinjin.viewstudy.viewstudy.view.DemoImageView01
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        image1:image="@mipmap/lmj"
+        image1:watermark="http://blog.jinjin1.net"
+        image1:watermarkcolor="@android:color/holo_red_dark"
+        image1:watermarksize="big"/>
+
+    <com.jinjin.viewstudy.viewstudy.view.DemoImageView01
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        image1:image="@mipmap/image2"
+        image1:watermark="http://blog.jinjin1.net"
+        image1:watermarkcolor="@android:color/holo_red_dark"
+        image1:watermarksize="big"/>
+
+</LinearLayout>
