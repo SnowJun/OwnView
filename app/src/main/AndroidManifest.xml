@@ -20,7 +20,7 @@
         <activity android:name=".activity.TextViewTestActivity01"/>
         <activity android:name=".activity.ImageViewTestActivity01"/>
         <activity android:name=".activity.ClockViewTestActivity01"/>
-
+        <activity android:name=".activity.ClockViewTestActivity02"/>
     </application>
 
 </manifest>

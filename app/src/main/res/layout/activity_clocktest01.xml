@@ -9,6 +9,12 @@
     android:orientation="vertical"
     tools:context="com.jinjin.viewstudy.viewstudy.MainActivity">
 
+    <Button
+        android:id="@+id/btn_test_clock02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="设置时间效果展示"/>
 
     <com.jinjin.viewstudy.viewstudy.view.DemoClockView01
         android:layout_width="wrap_content"
@@ -17,7 +23,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="280dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 

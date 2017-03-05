@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:clock="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:gravity="center_horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+    <com.jinjin.viewstudy.viewstudy.view.DemoClockView01
+        android:id="@+id/dv_clock"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_margin="10dp"
+        clock:bordercolor="@android:color/darker_gray"
+        clock:borderwidth="10dp"
+        clock:hourcolor="@android:color/holo_orange_dark"
+        clock:minutecolor="@android:color/black"
+        clock:numcolor="@android:color/darker_gray"
+        clock:numsize="16sp"
+        clock:pointcolor="@android:color/holo_blue_bright"
+        clock:secondcolor="@android:color/black"/>
+
+
+    <Button
+        android:id="@+id/btn_set0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="回归准确时间"/>
+
+    <Button
+        android:id="@+id/btn_set1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="设置时间为00:00:00"/>
+
+    <Button
+        android:id="@+id/btn_set2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="设置时间为03:02:30"/>
+
+
+    <Button
+        android:id="@+id/btn_set3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="设置时间为11:11:11"/>
+
+</LinearLayout>

@@ -9,6 +9,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -16,6 +18,7 @@ import android.view.View;
 
 import com.jinjin.viewstudy.viewstudy.R;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -67,6 +70,16 @@ public class DemoClockView01 extends View {
     private int mWidth;
     private int mHeight;
 
+    private boolean isShow;
+
+    private Calendar mCalendar;//日历类   用来计算时间相应的角度
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            invalidate();
+        }
+    };
 
     public DemoClockView01(Context context) {
         this(context, null);
@@ -111,8 +124,20 @@ public class DemoClockView01 extends View {
             }
         }
         array.recycle();
+        isShow = true;
+        mCalendar = Calendar.getInstance();
         mPaint = new Paint();
         mBound = new Rect();
+        Timer timer = new Timer("绘制线程");
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Log.d("test", "绘制一次");
+                if (isShow) {
+                    mHandler.sendEmptyMessage(1);
+                }
+            }
+        }, 0, 1000);
     }
 
 
@@ -164,7 +189,7 @@ public class DemoClockView01 extends View {
 
         mPaint.setAntiAlias(true);//去除边缘锯齿，优化绘制效果
         mPaint.setColor(mBorderColor);
-        if (mBorderColor == 0){
+        if (mBorderColor == 0) {
             mPaint.setColor(Color.BLACK);
         }
         canvas.drawCircle(cx, cy, width, mPaint);//外圆  红色
@@ -207,7 +232,7 @@ public class DemoClockView01 extends View {
                     TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
         }
         mPaint.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, getResources().getDisplayMetrics()));
-        String[] strs = new String[]{"12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11",};//绘制数字1-12  (数字角度不对  可以进行相关的处理)
+        String[] strs = new String[]{"12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"};//绘制数字1-12  (数字角度不对  可以进行相关的处理)
         Rect rect = new Rect();
         canvas.save();
         for (int i = 0; i < 12; i++) {//绘制12次  每次旋转30度
@@ -219,11 +244,35 @@ public class DemoClockView01 extends View {
         canvas.restore();
 
 
+        //关于当前时间的计算，默认为当前时间  当然是可以设置的
+
+        int hour = mCalendar.get(Calendar.HOUR);//HOUR    进制为12小时   HOUR_OF_DAY  为24小时
+        int minute = mCalendar.get(Calendar.MINUTE);//分钟
+        int second = mCalendar.get(Calendar.SECOND) + 1;//秒数
+        if (second == 60) {
+            minute += 1;
+            second = 0;
+        }
+        if (minute == 60){
+            hour += 1;
+            minute = 0;
+        }
+        if (hour == 12){
+            hour = 0;
+        }
+        mCalendar.set(Calendar.SECOND, second);
+        mCalendar.set(Calendar.MINUTE, minute);
+        mCalendar.set(Calendar.HOUR, hour);
+        float hourDegree = 360 * hour / 12 + 360 / 12 * minute / 60;//时针转动的角度   小时对应角度  加上  分钟对应角度   秒针忽略
+        float minuteDegree = 360 * minute / 60 + 360 / 60 * second / 60;//分针转动的角度   分针对应角度  加上  秒数对应角度
+        float secondDegree = 360 * second / 60;// 秒数对应角度
+
         mPaint.setColor(mHourColor);
         if (mHourColor == 0) {
             mPaint.setColor(Color.BLACK);
         }
         canvas.save();//绘制时针
+        canvas.rotate(hourDegree, cx, cy);
         canvas.drawRect(cx - TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3, getResources().getDisplayMetrics()),
                 getPaddingTop() + mBorderWidth + TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics()) + rect.width(),
                 cx + TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3, getResources().getDisplayMetrics()),
@@ -235,7 +284,7 @@ public class DemoClockView01 extends View {
             mPaint.setColor(Color.BLACK);
         }
         canvas.save();//保存后面的状态
-        canvas.rotate(60, cx, cy);
+        canvas.rotate(minuteDegree, cx, cy);
         canvas.drawRect(cx - TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()),
                 getPaddingTop() + mBorderWidth + TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25, getResources().getDisplayMetrics()),
                 cx + TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()),
@@ -248,7 +297,7 @@ public class DemoClockView01 extends View {
         }
         canvas.save();
         mPaint.setColor(Color.RED);
-        canvas.rotate(120, cx, cy);
+        canvas.rotate(secondDegree, cx, cy);
         canvas.drawRect(cx - TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics()),
                 getPaddingTop() + mBorderWidth + TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25, getResources().getDisplayMetrics()),
                 cx + TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics()),
@@ -258,7 +307,22 @@ public class DemoClockView01 extends View {
         mPaint.setColor(Color.RED);
         canvas.drawCircle(cx, cy, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6, getResources().getDisplayMetrics()), mPaint);//圆心，红色
 
+    }
 
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        isShow = false;
+    }
+
+    /**
+     * 设置时钟的时间
+     *
+     * @param calendar
+     */
+    public void setTime(Calendar calendar) {
+        mCalendar = calendar;
     }
 
 
