@@ -10,6 +10,6 @@
 
 详见博客部分：
 
-[文字View](http://blog.csdn.net/jinjin10086/article/details/54947301) 
-[图片View](http://blog.csdn.net/jinjin10086/article/details/54965622) 
-[动态时钟](http://blog.csdn.net/jinjin10086/article/details/56675526) 
+[文字View](http://blog.csdn.net/jinjin10086/article/details/54947301) <br/>
+[图片View](http://blog.csdn.net/jinjin10086/article/details/54965622) <br/>
+[动态时钟](http://blog.csdn.net/jinjin10086/article/details/56675526) <br/>
